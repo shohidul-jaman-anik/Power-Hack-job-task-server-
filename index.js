@@ -15,11 +15,12 @@ app.use(express.json())
 //Router
 const billingRoute = require('./routes/billingRoute');
 const userHandler=require('./routes/userHandler')
+const pagination=require("./routes/paginationRoute")
 
 
 app.use("/billing", billingRoute)
 app.use("/user", userHandler)
-
+app.use("/pagination",pagination)
 
 
 
