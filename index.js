@@ -14,18 +14,18 @@ app.use(express.json())
 
 //Router
 const billingRoute = require('./routes/billingRoute');
-const userHandler=require('./routes/userHandler')
-const pagination=require("./routes/paginationRoute")
+const userHandler = require('./routes/userHandler')
+const pagination = require("./routes/paginationRoute")
 
 
 app.use("/", billingRoute)
 app.use("/", userHandler)
-app.use("/pagination",pagination)
+app.use("/pagination", pagination)
 
 
 
-
-mongoose.connect(process.env.DATABASE_LOCAL, {
+const url='mongodb://localhost:27017/powerHacker';
+mongoose.connect(url, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }).then(() => console.log('Database connection successfully'))

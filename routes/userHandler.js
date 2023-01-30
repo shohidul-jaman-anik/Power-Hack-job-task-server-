@@ -39,7 +39,6 @@ router.post("/login", async (req, res) => {
             if (isValidPass) {
                 //generate token
                 const token = jwt.sign({
-                    // username: user[0].username,
                     email: user[0].email,
                     userId: user[0]._id,
                 }, process.env.ACCESS_TOKEN_SECRET, {

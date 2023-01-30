@@ -1,7 +1,9 @@
 const express = require("express");
 const billingController = require("../controllers/billingController");
 const router = express.Router();
-// const checkLogin = require("../middlewares/checkLogin")
+const checkLogin = require("../middlewares/checkLogin")
+
+// router.use(checkLogin)
 
 router.post('/add-billing', billingController.addBill)
 router.get('/billing-list', billingController.getBilling)
