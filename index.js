@@ -18,8 +18,8 @@ const userHandler=require('./routes/userHandler')
 const pagination=require("./routes/paginationRoute")
 
 
-app.use("/billing", billingRoute)
-app.use("/user", userHandler)
+app.use("/", billingRoute)
+app.use("/", userHandler)
 app.use("/pagination",pagination)
 
 

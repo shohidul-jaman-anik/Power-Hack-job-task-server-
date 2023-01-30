@@ -50,7 +50,9 @@ module.exports.getBilling = async (req, res, next) => {
 module.exports.updateBilling = async (req, res, next) => {
     const { id } = req.params
     try {
+        console.log(id);
         const result = await Brand.updateOne({ _id: id }, { $set: req.body }, { runValidators: true })
+        console.log(result)
         if (!result.nModified) {
             res.status(200).json({
                 status: "Fail",
@@ -68,6 +70,7 @@ module.exports.updateBilling = async (req, res, next) => {
             message: "Couldn't update the billing data",
             error: error.message
         })
+        console.log(error)
     }
 }
 

@@ -6,13 +6,13 @@ const jwt = require("jsonwebtoken")
 const userSchema = require('../model/userSchema')
 const User = new mongoose.model("User", userSchema);
 
-// SignUp
-router.post("/signup", async (req, res) => {
+// Registration
+router.post("/registration", async (req, res) => {
     try {
         const hashedPassword = await bcrypt.hash(req.body.password, 10)
         const newUser = new User({
             name: req.body.name,
-            username: req.body.username,
+            email: req.body.email,
             password: hashedPassword,
 
         });
@@ -21,10 +21,11 @@ router.post("/signup", async (req, res) => {
             message: "Signup was successfull"
         })
     }
-    catch {
+    catch (error){
         res.status(500).json({
             error: "Signup was not successfull"
         })
+        console.log(error)
     }
 
 })
@@ -32,13 +33,14 @@ router.post("/signup", async (req, res) => {
 // Login
 router.post("/login", async (req, res) => {
     try {
-        const user = await User.find({ username: req.body.username })
+        const user = await User.find({ email: req.body.email })
         if (user && user.length > 0) {
             const isValidPass = await bcrypt.compare(req.body.password, user[0].password)
             if (isValidPass) {
                 //generate token
                 const token = jwt.sign({
-                    username: user[0].username,
+                    // username: user[0].username,
+                    email: user[0].email,
                     userId: user[0]._id,
                 }, process.env.ACCESS_TOKEN_SECRET, {
                     expiresIn: "1h"
